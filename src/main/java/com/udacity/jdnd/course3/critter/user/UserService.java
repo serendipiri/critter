@@ -1,5 +1,6 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import com.udacity.jdnd.course3.critter.pet.Pet;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public class UserService {
 
     //TODO : transactional nerde kullanmak mantıklı?
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -30,5 +31,16 @@ public class UserService {
 
     public Optional getEmployee(long employeeId) {
         return userRepository.findById(employeeId);
+    }
+
+    public Customer getCustomer(long ownerId) {
+        Optional<Customer> customer = userRepository.findById(ownerId);
+        return customer.orElseGet(Customer::new);
+    }
+
+    public Customer getCustomerByPetId(long petId) {
+        Optional<Customer> optionalCustomer = userRepository.findCustomerByPetId(petId);
+        //TODO: bu mu getCustomer()daki mi doğru
+        return optionalCustomer.orElseGet(() -> (Customer) Optional.empty().get());
     }
 }

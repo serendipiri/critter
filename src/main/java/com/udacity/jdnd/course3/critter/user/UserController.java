@@ -43,7 +43,8 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
-        throw new UnsupportedOperationException();
+        Customer customer = userService.getCustomerByPetId(petId);
+        return convertToCustomerDTO(customer);
     }
 
     @PostMapping("/employee")
@@ -74,7 +75,7 @@ public class UserController {
     //TODO: DTO-Entity conversionları  nerde ne şekil yapılsa iyi
     //TODO: DTO vs Projection?
 
-    //TODO: PetList ne olucak id list??
+    //TODO: PetList ne olucak id list?? hepsini sorgulayacak mıyım?
     private Customer convertToCustomer(CustomerDTO customerDTO) {
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDTO, customer);
