@@ -1,7 +1,15 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import com.udacity.jdnd.course3.critter.customer.Customer;
+import com.udacity.jdnd.course3.critter.customer.CustomerDTO;
+import com.udacity.jdnd.course3.critter.employee.Employee;
+import com.udacity.jdnd.course3.critter.employee.EmployeeDTO;
+import com.udacity.jdnd.course3.critter.employee.EmployeeRequestDTO;
+import com.udacity.jdnd.course3.critter.pet.Pet;
+import com.udacity.jdnd.course3.critter.pet.PetService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
@@ -17,13 +25,12 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
-    UserService userService;
+    private final UserService userService;
+    private final PetService petService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
@@ -57,13 +64,12 @@ public class UserController {
     public EmployeeDTO getEmployee(@PathVariable long employeeId) {
         //TODO: hataları nasıl ele almalı?
         Employee employee = (Employee) userService.getEmployee(employeeId).orElseGet(Employee::new);
-                //.orElseThrow(NullPointerException::new);;
         return convertToEmployeeDTO(employee);
     }
 
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        userService.setAvailability(daysAvailable, employeeId);
     }
 
     @GetMapping("/employee/availability")
@@ -85,6 +91,12 @@ public class UserController {
     private CustomerDTO convertToCustomerDTO(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
         BeanUtils.copyProperties(customer, customerDTO);
+        if (!CollectionUtils.isEmpty(customer.getPets())) {
+            customerDTO.setPetIds(
+                    customer.getPets().stream()
+                            .map(Pet::getId)
+                            .collect(Collectors.toList()));
+        }
         return customerDTO;
     }
 

@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.user;
+package com.udacity.jdnd.course3.critter.employee;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -8,6 +8,7 @@ import java.util.Set;
  * to the database directly.
  */
 public class EmployeeRequestDTO {
+
     private Set<EmployeeSkill> skills;
     private LocalDate date;
 
@@ -26,4 +27,5 @@ public class EmployeeRequestDTO {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
 }

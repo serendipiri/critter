@@ -5,15 +5,12 @@ import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 
-@Entity
 @Data
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_user_generator")
-    @SequenceGenerator(name = "seq_user_generator", sequenceName = "seq_user", allocationSize = 1)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Nationalized

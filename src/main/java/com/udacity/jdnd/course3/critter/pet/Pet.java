@@ -1,12 +1,12 @@
 package com.udacity.jdnd.course3.critter.pet;
 
-import com.udacity.jdnd.course3.critter.user.Customer;
+import com.udacity.jdnd.course3.critter.schedule.Schedule;
+import com.udacity.jdnd.course3.critter.customer.Customer;
 import lombok.Data;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,24 +14,25 @@ import java.util.Set;
 public class Pet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pet_generator")
-    @SequenceGenerator(name = "seq_pet_generator", sequenceName = "seq_pet", allocationSize = 1)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Nationalized
     @Column(nullable = false)
     private String name;
 
-    @ElementCollection
-    private Set<PetType> type;
+    private PetType type;
 
     @ManyToOne
+    @JoinColumn(name = "owner_id")
     private Customer customer;
 
     private LocalDate birthDate;
 
     @Column(length = 1024)
     private String notes;
+
+    @OneToMany(mappedBy = "pet")
+    private Set<Schedule> schedules;
 
 }

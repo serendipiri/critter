@@ -1,13 +1,12 @@
 package com.udacity.jdnd.course3.critter.schedule;
 
 import com.udacity.jdnd.course3.critter.pet.Pet;
-import com.udacity.jdnd.course3.critter.user.Employee;
-import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
+import com.udacity.jdnd.course3.critter.employee.Employee;
+import com.udacity.jdnd.course3.critter.employee.EmployeeSkill;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,16 +14,16 @@ import java.util.Set;
 public class Schedule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_schedule")
-    @SequenceGenerator(name = "seq_schedule", sequenceName = "seq_schedule_generator", allocationSize = 1)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    private List<Employee> employeeList;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
-    @ManyToMany
-    private List<Pet> petList;
+    @ManyToOne
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
 
     @ElementCollection
     private Set<EmployeeSkill> activities;
