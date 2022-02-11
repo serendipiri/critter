@@ -1,7 +1,8 @@
 package com.udacity.jdnd.course3.critter.pet;
 
 import com.udacity.jdnd.course3.critter.customer.Customer;
-import com.udacity.jdnd.course3.critter.user.UserService;
+import com.udacity.jdnd.course3.critter.customer.CustomerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,15 +14,11 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/pet")
+@RequiredArgsConstructor
 public class PetController {
 
-    private PetService petService;
-    private UserService userService;
-
-    public PetController(PetService petService, UserService userService) {
-        this.petService = petService;
-        this.userService = userService;
-    }
+    private final PetService petService;
+    private final CustomerService customerService;
 
     @PostMapping
     public PetDTO savePet(@RequestBody PetDTO petDTO) {
@@ -29,7 +26,7 @@ public class PetController {
         Pet pet = convertDtoToEntity(petDTO);
 
         if (petDTO.getOwnerId() > 0) {
-            customer = userService.getCustomer(petDTO.getOwnerId());
+            customer = customerService.getCustomer(petDTO.getOwnerId());
             if (customer.getId() == null) {
                 //TODO: hata vermeli sanki? -customer yoksa pet kimin olucu? veya bilemedim neyse. bunu nerde ele almak mantıklı
             }
