@@ -14,7 +14,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("select e from Employee e" +
             " join e.skills s" +
             " where :availableDay member of e.daysAvailable " +
-            " and :count = ( select count(*) from s in (:skills) ) "  )
-    List<Employee> getAvailableEmployeeBySkills(DayOfWeek availableDay, Set<EmployeeSkill> skills, int count);
+            " and s in (:skills) "  )
+//            " and exists (select 1 from e.skills s where e.id =  s.EmployeeSkill in (:skills))" )
+    List<Employee> getAvailableEmployeeBySkills(DayOfWeek availableDay, Set<EmployeeSkill> skills);
 
 }
