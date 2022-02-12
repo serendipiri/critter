@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
@@ -35,7 +36,10 @@ public class EmployeeController {
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        List<Employee> list = employeeService.getAvailableEmployeeBySkills(employeeDTO.getDate(), employeeDTO.getSkills());
+        return list.stream()
+                .map(this::convertToEmployeeDTO)
+                .collect(Collectors.toList());
     }
 
     //TODO : genericlerle yapılsa, dto ya da inheritance yapayım dicem ama

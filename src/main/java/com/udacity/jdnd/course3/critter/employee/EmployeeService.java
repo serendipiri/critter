@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -25,8 +27,12 @@ public class EmployeeService {
         Optional<Employee> employeeOpt = employeeRepository.findById(employeeId);
         if (employeeOpt.isPresent()) {
             employeeOpt.get().setDaysAvailable(daysAvailable);
-            employeeRepository.save(employeeOpt.get());
         }
+    }
+
+    public List<Employee> getAvailableEmployeeBySkills(LocalDate date, Set<EmployeeSkill> skills) {
+        DayOfWeek availableDay = DayOfWeek.from(date);
+        return employeeRepository.getAvailableEmployeeBySkills(availableDay, skills, skills.size());
     }
 
 }
