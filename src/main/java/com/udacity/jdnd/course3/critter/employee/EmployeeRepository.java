@@ -12,10 +12,11 @@ import java.util.Set;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Query("select e from Employee e" +
-            " join e.skills s" +
-            " where :availableDay member of e.daysAvailable " +
-            " and s in (:skills) "  )
-//            " and exists (select 1 from e.skills s where e.id =  s.EmployeeSkill in (:skills))" )
-    List<Employee> getAvailableEmployeeBySkills(DayOfWeek availableDay, Set<EmployeeSkill> skills);
+           "  join e.skills s" +
+           " where :availableDay member of e.daysAvailable " +
+           "   and s in :skills" +
+           " group by e.id" +
+           " having count(e.id) = :count " )
+    List<Employee> getAvailableEmployeeBySkillList(DayOfWeek availableDay, Set<EmployeeSkill> skills, long count);
 
 }

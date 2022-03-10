@@ -181,6 +181,15 @@ public class CritterFunctionalTest {
         Set<Long> eIds2 = employeeController.findEmployeesForService(er2).stream().map(EmployeeDTO::getId).collect(Collectors.toSet());
         Set<Long> eIds2expected = Sets.newHashSet(emp3n.getId());
         Assertions.assertEquals(eIds2, eIds2expected);
+
+        //make a request that matches employee 2 or 3
+        EmployeeRequestDTO er3 = new EmployeeRequestDTO();
+        er3.setDate(LocalDate.of(2019, 12, 27)); //friday
+        er3.setSkills(Sets.newHashSet(EmployeeSkill.WALKING));
+
+        Set<Long> eIds3 = employeeController.findEmployeesForService(er3).stream().map(EmployeeDTO::getId).collect(Collectors.toSet());
+        Set<Long> eIds3expected = Sets.newHashSet(emp2n.getId(), emp3n.getId());
+        Assertions.assertEquals(eIds3, eIds3expected);
     }
 
     @Test

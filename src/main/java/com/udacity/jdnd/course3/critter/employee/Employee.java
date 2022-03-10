@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import java.time.DayOfWeek;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class Employee extends User {
     @ElementCollection
     private Set<DayOfWeek> daysAvailable;
 
-    @OneToMany(mappedBy = "employee")
+    @ManyToMany(mappedBy = "employeeList")
     private Set<Schedule> schedules;
 
 }

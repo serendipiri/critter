@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Launches the Spring application. Unmodified from starter code.
  */
 @SpringBootApplication
-//@EnableTransactionManagement
 public class CritterApplication {
 
 	public static void main(String[] args) {

@@ -32,7 +32,7 @@ public class Pet {
     @Column(length = 1024)
     private String notes;
 
-    @OneToMany(mappedBy = "pet")
+    @ManyToMany(mappedBy = "petList")
     private Set<Schedule> schedules;
 
 }

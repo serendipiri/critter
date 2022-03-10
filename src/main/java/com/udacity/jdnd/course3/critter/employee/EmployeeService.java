@@ -32,7 +32,7 @@ public class EmployeeService {
 
     public List<Employee> getAvailableEmployeeBySkills(LocalDate date, Set<EmployeeSkill> skills) {
         DayOfWeek availableDay = DayOfWeek.from(date);
-        return employeeRepository.getAvailableEmployeeBySkills(availableDay, skills, skills.size());
+        return employeeRepository.getAvailableEmployeeBySkillList(availableDay, skills, skills.size());
     }
 
 }
