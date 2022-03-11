@@ -3,17 +3,7 @@ u
 Esrc/main/java/com/udacity/jdnd/course3/critter/CritterController.java,f\a\fa7c4ea1e78585283c305b96ad811a63a9065ee9
 o
 ?src/main/java/com/udacity/jdnd/course3/critter/pet/PetType.java,7\8\788287bf6bf286cc1d93df1cdcfa195fba10c3b1
-r
-Bsrc/main/java/com/udacity/jdnd/course3/critter/pet/PetService.java,c\9\c9297d5c59ad561724cb76a9a92ab695363f7f18
-n
->src/main/java/com/udacity/jdnd/course3/critter/pet/PetDTO.java,6\d\6dec70385f5cc0386a0d2b91bcb13c42f1dee8d5
-x
-Hsrc/main/java/com/udacity/jdnd/course3/critter/employee/EmployeeDTO.java,9\c\9cd00fa01f65157683f1f52f2eb82de2117aab95
-x
-Hsrc/main/java/com/udacity/jdnd/course3/critter/customer/CustomerDTO.java,c\1\c174faa3355f78a296da6f2cc208ea002cc5bfe3
 t
 Dsrc/main/java/com/udacity/jdnd/course3/critter/util/CritterUtil.java,a\a\aae0e288d7983aaf2059e730ba99c928d6aa2c48
-m
-=src/main/java/com/udacity/jdnd/course3/critter/user/User.java,1\d\1d5b44714ac348b5403574c79ab3abc970a83d0d
 
 Osrc/main/java/com/udacity/jdnd/course3/critter/customer/CustomerRepository.java,a\0\a078739cdbc3d084d9a7441003db36b6ca046a5c

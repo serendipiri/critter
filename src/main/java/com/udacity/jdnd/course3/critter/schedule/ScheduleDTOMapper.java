@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.dto;
+package com.udacity.jdnd.course3.critter.schedule;
 
 import com.udacity.jdnd.course3.critter.employee.Employee;
 import com.udacity.jdnd.course3.critter.employee.EmployeeDTO;
@@ -12,16 +12,16 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring")
-public interface DtoMapper {
+public interface ScheduleDTOMapper {
 
 //    @InheritInverseConfiguration(name = "scheduleToScheduleDTO")
     @Mapping(source = "employeeIds", target = "employeeList", qualifiedByName = "idToEmployee")
     @Mapping(source = "petIds", target = "petList", qualifiedByName = "idToPet")
-    Schedule scheduleDTOToSchedule(ScheduleDTO scheduleDTO);
+    Schedule toSchedule(ScheduleDTO scheduleDTO);
 
     @Mapping(source = "employeeList", target = "employeeIds", qualifiedByName = "employeeToId")
     @Mapping(source = "petList", target = "petIds", qualifiedByName = "petToId")
-    ScheduleDTO scheduleToScheduleDTO(Schedule schedule);
+    ScheduleDTO toScheduleDTO(Schedule schedule);
 
     @Named("employeeToId")
     static Long employeeListToId(Employee employee) {
@@ -46,13 +46,5 @@ public interface DtoMapper {
         pet.setId(id);
         return pet;
     }
-
-    Employee employeeDTOToEmployee(EmployeeDTO employeeDTO);
-
-    EmployeeDTO employeeToEmployeeDTO(Employee employee);
-
-    Pet petDTOToPet(PetDTO petDTO);
-
-    PetDTO petToPetDTO(PetDTO petDTO);
 
 }

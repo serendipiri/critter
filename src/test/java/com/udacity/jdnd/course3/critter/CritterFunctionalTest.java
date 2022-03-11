@@ -53,8 +53,6 @@ public class CritterFunctionalTest {
     @Autowired
     private ScheduleController scheduleController;
 
-//    @Mock
-//    private CustomerService customerService;
 
     @Test
     public void testCreateCustomer(){

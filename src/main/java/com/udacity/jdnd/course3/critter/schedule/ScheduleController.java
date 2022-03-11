@@ -1,6 +1,5 @@
 package com.udacity.jdnd.course3.critter.schedule;
 
-import com.udacity.jdnd.course3.critter.dto.DtoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,13 +15,13 @@ import java.util.stream.Collectors;
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
-    private final DtoMapper mapper;
+    private final ScheduleDTOMapper mapper;
 
     @PostMapping
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
-        Schedule schedule = mapper.scheduleDTOToSchedule(scheduleDTO);
+        Schedule schedule = mapper.toSchedule(scheduleDTO);
         schedule = scheduleService.createSchedule(schedule);
-        return mapper.scheduleToScheduleDTO(schedule);
+        return mapper.toScheduleDTO(schedule);
     }
 
     @GetMapping
@@ -52,7 +51,7 @@ public class ScheduleController {
 
     private List<ScheduleDTO> getScheduleDtoList(List<Schedule> list) {
         return list.stream()
-                .map(mapper::scheduleToScheduleDTO)
+                .map(mapper::toScheduleDTO)
                 .collect(Collectors.toList());
     }
 
